@@ -1,0 +1,4 @@
+{
+
+  "exec": "node -r dotenv-flow/config src/index.js"
+}
