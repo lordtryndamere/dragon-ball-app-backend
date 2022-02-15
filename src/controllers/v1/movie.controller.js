@@ -24,9 +24,9 @@ class MovieController {
         return {
           name: value.name,
           sinopsis: value.sinopsis,
-          posterImg: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}${value.posterImg}`,
+          posterImg: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.posterImg}`,
           status: value.status,
-          videoUri: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}${value.videoUri}`,
+          videoUri: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           categoryStatus: value.category[0].status
@@ -150,9 +150,9 @@ class MovieController {
         return {
           name: value.name,
           sinopsis: value.sinopsis,
-          posterImg: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}${value.posterImg}`,
+          posterImg: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.posterImg}`,
           status: value.status,
-          videoUri: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}${value.videoUri}`,
+          videoUri: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           categoryStatus: value.category[0].status
