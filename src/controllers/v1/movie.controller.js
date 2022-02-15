@@ -18,6 +18,9 @@ class MovieController {
           createErrorResponse({
             httpStatusCode: 404,
             message: 'No encontramos nada ',
+            data: {
+              movies
+            }
           }), res);
       }
       movies = movies.map((value) => {
@@ -144,6 +147,9 @@ class MovieController {
           createErrorResponse({
             httpStatusCode: 404,
             message: 'No encontramos nada ',
+            data: {
+              movies
+            }
           }), res);
       }
       movies = movies.map((value) => {
@@ -187,6 +193,9 @@ class MovieController {
           createErrorResponse({
             httpStatusCode: 404,
             message: 'No encontramos nada ',
+            data: {
+              categories
+            }
           }), res);
       }
       return controllerResponse(createResponse({
