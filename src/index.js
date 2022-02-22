@@ -16,7 +16,7 @@ async function init(){
     await  main()
 }
 init()
-app.use(fileUpload({createParentPath:true}));
+app.use(fileUpload());
 
 
 app.use(bodyParser.json());
