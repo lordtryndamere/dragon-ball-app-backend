@@ -1,5 +1,6 @@
 
 const uploadFiles = (file)=>{
+    console.log(file);
     try {
         const name  = `${Math.random().toString(36).slice(2)}-${file.name}`
         file.mv('../../uploads/'+name);

@@ -91,18 +91,18 @@ class MovieController {
 
 
    let savedMovie =   await movie.create(saveMovie);
-   console.log(savedMovie);
+  
       return controllerResponse(createResponse({
         httpStatusCode: 201,
         message: 'Pelicula  creada!',
         data: {
-          saveMovie
+          savedMovie
         },
       }), res);
 
     } catch (e) {
       return controllerResponse(createErrorResponse({
-        data: e,
+        data: e.error,
         message: 'Server error',
       }), res);
     }
