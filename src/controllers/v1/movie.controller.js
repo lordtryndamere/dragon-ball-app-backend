@@ -29,6 +29,7 @@ class MovieController {
           id:value._id,
           name: value.name,
           sinopsis: value.sinopsis,
+          mimeType:value.mimeType,
           posterImg: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}/${value.mimeType}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}/${value.mimeType}`,
           status: value.status,
           videoUri: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.videoUri}`,
@@ -84,7 +85,7 @@ class MovieController {
         if (key === 'videoUri'){
           //let upload = await awsInstance.uploadFile(iterator.videoUri, 'movies/assets');
           let upload = uploadFiles(iterator.videoUri);  
-          saveMovie =    saveMovie = {...saveMovie,videoUri:upload.data.name,mimeType:upload.data.mimetype} ;
+          saveMovie =    saveMovie = {...saveMovie,videoUri:upload.data.name} ;
         } 
       }
 
@@ -164,6 +165,7 @@ class MovieController {
           videoUri: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
+          mimeType:value.mimeType,
           categoryStatus: value.category[0].status
         }
       });
