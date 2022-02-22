@@ -102,7 +102,7 @@ class MovieController {
 
     } catch (e) {
       return controllerResponse(createErrorResponse({
-        data: e.error,
+        data: e,
         message: 'Server error',
       }), res);
     }

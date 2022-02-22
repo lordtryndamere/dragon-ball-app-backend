@@ -20,7 +20,7 @@ init()
 app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
-app.use(fileUpload({createParentPath:true}));
+app.use(fileUpload());
 app.use(morgan('dev'));
 
 
