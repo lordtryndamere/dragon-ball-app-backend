@@ -9,7 +9,7 @@ class VideoController {
     getVideo = async (req, res) => {
    
         const videoId = req.params.videoId;
-        const videoPath = `../../../uploads/${videoId}.mp4`;
+        const videoPath = `./uploads/${videoId}.mp4`;
         const headers = {
           "Content-Type": "video/mp4",
         };
@@ -21,7 +21,7 @@ class VideoController {
     getImage = async (req,res)=>{
         const nameImage = req.params.nameImage;
         const mimetype = req.params.mimetype;
-        fs.readFile(`../../../uploads/${nameImage}`,(err,data)=>{
+        fs.readFile(`./uploads/${nameImage}`,(err,data)=>{
             if(err) return res.status(500).send({err})
             res.writeHead(200,{'Content-type':`image/${mimetype}`})
             res.write(data);
