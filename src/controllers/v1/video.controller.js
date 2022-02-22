@@ -9,7 +9,7 @@ class VideoController {
     getVideo = async (req, res) => {
    
         const videoId = req.params.videoId;
-        const videoPath = `./uploads/${videoId}.mp4`;
+        const videoPath = `./uploads/${videoId}`;
         const headers = {
           "Content-Type": "video/mp4",
         };
