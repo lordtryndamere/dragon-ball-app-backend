@@ -1,7 +1,6 @@
 
-const uploadFiles = (req)=>{
+const uploadFiles = (file)=>{
     try {
-        let file = req.files.file;
         const name  = `${Math.random().toString(36).slice(2)}-${file.name}`
         file.mv('../../uploads/'+name);
         return{
@@ -10,8 +9,8 @@ const uploadFiles = (req)=>{
             message:'file uploaded',
             data:{
                 name: name,
-                mimetype: avatar.mimetype,
-                size: avatar.size
+                mimetype: file.mimetype,
+                size: file.size
             }
         }        
     } catch (error) {
