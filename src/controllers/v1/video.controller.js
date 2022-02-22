@@ -5,11 +5,12 @@ const awsInstance = new AwsLib();
 
 const { createErrorResponse, createResponse, controllerResponse } = require('../../tools/response')
 const fs = require('fs');
+const path = require('path')
 class VideoController {
     getVideo = async (req, res) => {
    
         const videoId = req.params.videoId;
-        const videoPath = `./uploads/${videoId}`;
+        const videoPath = `./public/uploads/${videoId}`;
         const headers = {
           "Content-Type": "video/mp4",
         };
@@ -21,7 +22,7 @@ class VideoController {
     getImage = async (req,res)=>{
         const nameImage = req.params.nameImage;
         const mimetype = req.params.mimetype;
-        fs.readFile(`./uploads/${nameImage}`,(err,data)=>{
+        fs.readFile(`./public/uploads/${nameImage}`,(err,data)=>{
             if(err) return res.status(500).send({err})
             res.writeHead(200,{'Content-type':`image/${mimetype}`})
             res.write(data);
