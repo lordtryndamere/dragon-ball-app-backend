@@ -5,6 +5,7 @@ const  movieSchema = mongoose.Schema({
     posterImg:String,
     status:{type:String,default:'active'},
     videoUri:String,
+    mimeType:String,
     category:[{type:mongoose.Schema.Types.ObjectId,ref:'category'}],
     create_at:{ type: Date, default: Date.now },
     updated_at:{ type: Date, default: Date.now },

@@ -3,7 +3,8 @@ const { getRepository, Like } = require('typeorm');
 const { movie, category } = require('../../schemas')
 const { AwsLib } = require('../../tools/aws')
 const awsInstance = new AwsLib();
-const { createErrorResponse, createResponse, controllerResponse } = require('../../tools/response')
+const { createErrorResponse, createResponse, controllerResponse } = require('../../tools/response');
+const { uploadFiles } = require('../../tools/uploads');
 
 class MovieController {
   getMovies = async (req, res) => {
@@ -25,11 +26,12 @@ class MovieController {
       }
       movies = movies.map((value) => {
         return {
+          id:value._id,
           name: value.name,
           sinopsis: value.sinopsis,
-          posterImg: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.posterImg}`,
+          posterImg: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}/${value.mimeType}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}/${value.mimeType}`,
           status: value.status,
-          videoUri: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.videoUri}`,
+          videoUri: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           categoryStatus: value.category[0].status
@@ -75,14 +77,14 @@ class MovieController {
        
 
         if (key === 'posterImg'){
-          let upload = await awsInstance.uploadFile(iterator.posterImg, 'movies/assets');
-          console.log('img',upload);
-          saveMovie =  {...saveMovie,posterImg:upload.data.nameImage};
+          //let upload = await awsInstance.uploadFile(iterator.posterImg, 'movies/assets');
+            let upload = uploadFiles(req)  
+              saveMovie =  {...saveMovie,posterImg:upload.data.name,mimeType:upload.data.mimetype};
         } 
         if (key === 'videoUri'){
-          let upload = await awsInstance.uploadFile(iterator.videoUri, 'movies/assets');
-          console.log('video',upload);
-          saveMovie =    saveMovie = {...saveMovie,videoUri:upload.data.nameImage} ;
+          //let upload = await awsInstance.uploadFile(iterator.videoUri, 'movies/assets');
+          let upload = uploadFiles(req)  
+          saveMovie =    saveMovie = {...saveMovie,videoUri:upload.data.name,mimeType:upload.data.mimetype} ;
         } 
       }
 
@@ -154,15 +156,15 @@ class MovieController {
       }
       movies = movies.map((value) => {
         return {
+          id:value._id,
           name: value.name,
           sinopsis: value.sinopsis,
-          posterImg: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.posterImg}`,
+          posterImg: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}/${value.mimeType}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}/${value.mimeType}`,
           status: value.status,
-          videoUri: `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.videoUri}`,
+          videoUri: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           categoryStatus: value.category[0].status
-
         }
       });
       return controllerResponse(createResponse({

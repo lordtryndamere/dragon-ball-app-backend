@@ -27,8 +27,6 @@ const {awsConfig} = require('../config/aws')
   uploadFile = async (file,folder)=>{
     try {
      const getS3Instance = this.getS3Instance();
-      console.log(file.name);
-      
       const params = {
         Bucket: `${process.env.AWS_BUCKET}/${folder}`, // pass your bucket name
         Key: `${Math.random().toString(36).slice(2)}-${file.name}`, 

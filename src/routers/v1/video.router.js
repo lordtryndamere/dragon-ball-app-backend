@@ -4,7 +4,8 @@ const video = new VideoController();
 const {vertifyTokenMiddleware} = require('../../middlewares/verify-token.middleware')
 module.exports = () =>{
     const router = Router();
-    router.get('/',video.getVideos)
+    router.get('/get-image/nameImage/mimetype',video.getImage)
+    router.get('/get-video/:videoId',video.getVideo)
 
     return router
 }
