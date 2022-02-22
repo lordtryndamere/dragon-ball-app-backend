@@ -79,12 +79,12 @@ class MovieController {
 
         if (key === 'posterImg'){
           //let upload = await awsInstance.uploadFile(iterator.posterImg, 'movies/assets');
-            let upload = uploadFiles(iterator.posterImg);  
+            let upload =  await uploadFiles(iterator.posterImg);  
               saveMovie =  {...saveMovie,posterImg:upload.data.name,mimeType:upload.data.mimetype};
         } 
         if (key === 'videoUri'){
           //let upload = await awsInstance.uploadFile(iterator.videoUri, 'movies/assets');
-          let upload = uploadFiles(iterator.videoUri);  
+          let upload = await uploadFiles(iterator.videoUri);  
           saveMovie =    saveMovie = {...saveMovie,videoUri:upload.data.name} ;
         } 
       }

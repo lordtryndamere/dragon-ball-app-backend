@@ -1,15 +1,15 @@
 
-const uploadFiles = (file)=>{
+const uploadFiles = async (file)=>{
     console.log(file);
     try {
         const name  = `${Math.random().toString(36).slice(2)}-${file.name}`
-        file.mv('./public/uploads'+name);
+       await file.mv('./public/uploads'+name);
         return{
             status:true,
             code:100,
             message:'file uploaded',
             data:{
-                name: name,
+                name: name, 
                 mimetype: file.mimetype,
                 size: file.size
             }
