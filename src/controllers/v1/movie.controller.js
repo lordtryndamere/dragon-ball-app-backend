@@ -30,9 +30,9 @@ class MovieController {
           name: value.name,
           sinopsis: value.sinopsis,
           mimeType:value.mimeType,
-          posterImg: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}`,
+          posterImg: process.env.NODE_ENV == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}`,
           status: value.status,
-          videoUri: process.env == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-video/${value.videoUri}`,
+          videoUri: process.env.NODE_ENV == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-video/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           categoryStatus: value.category[0].status
