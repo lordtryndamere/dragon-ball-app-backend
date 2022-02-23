@@ -3,10 +3,10 @@ const path = require('path')
 class VideoController {
     getVideo = async (req, res) => {
             const videoId = req.params.videoId;
-            const mimetype = nameImage.split('.')[1];
+            const mimetype = videoId.split('.')[1];
             fs.readFile(path.join(__dirname, '../../../uploads/'+videoId),(err,data)=>{
                 if(err) return res.status(500).send({err})
-                res.writeHead(200,{'Content-type':`video/${mimetype}`})
+                res.writeHead(200,{'Content-Type':`video/mp4`})
                 res.write(data);
                 res.end();
             });
