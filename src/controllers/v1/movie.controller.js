@@ -1,8 +1,8 @@
 
-const { getRepository, Like } = require('typeorm');
+//const { getRepository, Like } = require('typeorm');
 const { movie, category } = require('../../schemas')
 const { AwsLib } = require('../../tools/aws')
-const awsInstance = new AwsLib();
+//const awsInstance = new AwsLib();
 const { createErrorResponse, createResponse, controllerResponse } = require('../../tools/response');
 const { uploadFiles } = require('../../tools/uploads');
 
@@ -62,6 +62,7 @@ class MovieController {
         { posterImg: files.posterImg },
         { videoUri: files.videoUri }
       ];
+
       const ifExistsMovie = await movie.findOne({ 'name': body.name });
       if (ifExistsMovie) {
         return controllerResponse(
@@ -91,7 +92,7 @@ class MovieController {
 
 
 
-   let savedMovie =   await movie.create(saveMovie);
+    let savedMovie =   await movie.create(saveMovie);
   
       return controllerResponse(createResponse({
         httpStatusCode: 201,

@@ -16,13 +16,14 @@ async function init(){
     await  main()
 }
 init()
-app.use(fileUpload());
+app.use(fileUpload({createParentPath:true}));
 
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
+
 
 
 
