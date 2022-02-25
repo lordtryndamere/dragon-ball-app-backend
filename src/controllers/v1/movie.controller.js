@@ -30,9 +30,9 @@ class MovieController {
           name: value.name,
           sinopsis: value.sinopsis,
           mimeType:value.mimeType,
-          posterImg: process.env.NODE_ENV == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}`,
+          posterImg:   `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.posterImg}`,
           status: value.status,
-          videoUri: process.env.NODE_ENV == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-video/${value.videoUri}`,
+          videoUri:  `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           categoryStatus: value.category[0].status
@@ -79,13 +79,13 @@ class MovieController {
        
 
         if (key === 'posterImg'){
-          //let upload = await awsInstance.uploadFile(iterator.posterImg, 'movies/assets');
-            let upload =   uploadFiles(iterator.posterImg);  
-              saveMovie =  {...saveMovie,posterImg:upload.data.name,mimeType:upload.data.mimetype};
+          let upload = await awsInstance.uploadFile(iterator.posterImg, 'movies/assets');
+           // let upload =   uploadFiles(iterator.posterImg);  
+              saveMovie =  {...saveMovie,posterImg:upload.data.name,mimeType:'no-data'};
         } 
         if (key === 'videoUri'){
-          //let upload = await awsInstance.uploadFile(iterator.videoUri, 'movies/assets');
-          let upload =  uploadFiles(iterator.videoUri);  
+          let upload = await awsInstance.uploadFile(iterator.videoUri, 'movies/assets');
+         // let upload =  uploadFiles(iterator.videoUri);  
           saveMovie =    saveMovie = {...saveMovie,videoUri:upload.data.name} ;
         } 
       }
@@ -161,9 +161,9 @@ class MovieController {
           id:value._id,
           name: value.name,
           sinopsis: value.sinopsis,
-          posterImg: process.env.NODE_ENV == 'development' ? `${process.env.EndPointLocal}/video/get-image/${value.posterImg}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-image/${value.posterImg}`,
+          posterImg:   `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.posterImg}`,
           status: value.status,
-          videoUri: process.env.NODE_ENV == 'development' ? `${process.env.EndPointLocal}/video/get-video/${value.videoUri}`  :  `${process.env.HEROKU_ENDPOINT}/video/get-video/${value.videoUri}`,
+          videoUri:  `${process.env.AWS_URI_LOCATION}${process.env.AWS_MOVIES_FOLDER}/${value.videoUri}`,
           categoryId: value.category[0]._id,
           categoryName: value.category[0].name,
           mimeType:value.mimeType,
